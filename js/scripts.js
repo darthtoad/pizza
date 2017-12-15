@@ -1,6 +1,14 @@
+var toppingsArray = [];
+
 var toppingsObj = {
   pepperoni: 2,
-  mushroom: 1
+  sausage: 2,
+  mushroom: 1,
+  peppers: 1,
+  onion: 1,
+  spinach: 1,
+  olives: 1,
+  cheese: 1
 }
 
 var sizeObj = {
@@ -10,9 +18,9 @@ var sizeObj = {
   jumbo: 15
 }
 
-var Pizza = function(size) {
+var Pizza = function(size, toppings) {
   this.size = size;
-  //this.toppings = toppings;
+  this.toppings = toppings;
   this.price = 0;
 }
 
@@ -26,15 +34,27 @@ Pizza.prototype.calculatePrice = function() {
       this.price += sizeObj[key];
     }
   }
+  var toppingsTotal = 0;
+  for (var key in toppingsObj) {
+    toppingsArray.forEach(function(value){
+      if (key === value) {
+        toppingsTotal += toppingsObj[key];
+      }
+    })
+  }
+  this.price += toppingsTotal;
 }
 
 $(document).ready(function(){
   $("form#order").submit(function(event){
     event.preventDefault();
     $("#result").empty();
+    toppingsArray = [];
     var size = $("input:radio[name=size]:checked").val();
-    var newPizza = new Pizza(size);
-    console.log(newPizza);
+    $("input:checkbox[name=toppings]:checked").each(function(){
+      toppingsArray.push($(this).val());
+    })
+    var newPizza = new Pizza(size, toppingsArray);
     newPizza.calculatePrice();
     $("#result").append("You just ordered a " + newPizza.size + " size pizza. Your total is $" + newPizza.price);
   })
