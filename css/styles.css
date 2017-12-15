@@ -1,3 +1,7 @@
 #number {
   width: 70px;
 }
+
+#order {
+  display: none;
+}
