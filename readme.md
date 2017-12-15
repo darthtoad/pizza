@@ -16,9 +16,6 @@ _This app allows the user to order a pizza. They may add toppings and select a s
 | Program can give price of this pizza | medium" | "size: medium. price: $10" |
 | Program can change the price of the pizza given the size | "large" | "size: large. price: $13" |
 | Program can add toppings to the pizza and change the price given the type/number of toppings | "toppings: pepperoni. size: large." | "toppings: pepperoni. size: large. price: $15" |
-| It can replace any number containing 1 with Boop! | 31 | ... "Boop!" |
-| It can replace any number containing 0 with Beep! | 300 | ... "Beep!" |
-| It can replace any number divisible by 3 with "I'm sorry, Dave. I'm afraid I can't do that." | 9 | ... "I'm sorry, Dave. I'm afraid I can't do that." |
 
 ## Setup/Installation Requirements
 
