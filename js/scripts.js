@@ -18,15 +18,12 @@ var sizeObj = {
   jumbo: 15
 }
 
-var Pizza = function(size, toppings) {
+var Pizza = function(size, toppings, number) {
   this.size = size;
   this.toppings = toppings;
+  this.number = number;
   this.price = 0;
 }
-
-// Pizza.prototype.addToppings(toppings) {
-//
-// }
 
 Pizza.prototype.calculatePrice = function() {
   for (var key in sizeObj) {
@@ -43,6 +40,7 @@ Pizza.prototype.calculatePrice = function() {
     })
   }
   this.price += toppingsTotal;
+  this.price *= this.number;
 }
 
 $(document).ready(function(){
@@ -54,7 +52,8 @@ $(document).ready(function(){
     $("input:checkbox[name=toppings]:checked").each(function(){
       toppingsArray.push($(this).val());
     })
-    var newPizza = new Pizza(size, toppingsArray);
+    var number = $("input#number").val();
+    var newPizza = new Pizza(size, toppingsArray, number);
     newPizza.calculatePrice();
     $("#result").append("You just ordered a " + newPizza.size + " size pizza with " + newPizza.toppings.join(", ") + ". Your total is $" + newPizza.price);
   })
