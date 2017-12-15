@@ -36,7 +36,7 @@ Pizza.prototype.calculatePrice = function() {
   }
   var toppingsTotal = 0;
   for (var key in toppingsObj) {
-    toppingsArray.forEach(function(value){
+    this.toppings.forEach(function(value){
       if (key === value) {
         toppingsTotal += toppingsObj[key];
       }
