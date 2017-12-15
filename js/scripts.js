@@ -1,7 +1,5 @@
 var toppingsArray = [];
 
-var pizzaArray = [];
-
 var toppingsObj = {
   pepperoni: 2,
   sausage: 2,
@@ -52,7 +50,6 @@ Pizza.prototype.calculatePrice = function() {
 
 $(document).ready(function(){
   $("form#number-input").submit(function(event){
-    debugger;
     event.preventDefault();
     $("#result").empty();
     number = $("input#number").val();
@@ -104,7 +101,6 @@ $(document).ready(function(){
   })
   $("form#order").submit(function(event){
     event.preventDefault();
-    console.log("It works!");
     $("#result").empty();
     toppingsArray = [];
     var sizes = [];
@@ -120,6 +116,6 @@ $(document).ready(function(){
 
     var newPizza = new Pizza(sizes, toppingsArray/*, number*/);
     newPizza.calculatePrice();
-    $("#result").append("You just ordered a " + newPizza.size + " size pizza with " + newPizza.toppings.join(", ") + ". Your total is $" + newPizza.price);
+    $("#result").append("<br><br>Your total is $" + newPizza.price + "<br><br>");
   })
 })
