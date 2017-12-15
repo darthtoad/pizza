@@ -7,7 +7,7 @@ var sizeObj = {
   personal: 7,
   medium: 10,
   large: 13,
-  extralarge: 15
+  jumbo: 15
 }
 
 var Pizza = function(size) {
@@ -36,6 +36,6 @@ $(document).ready(function(){
     var newPizza = new Pizza(size);
     console.log(newPizza);
     newPizza.calculatePrice();
-    $("#result").append("Your total is $" + newPizza.price);
+    $("#result").append("You just ordered a " + newPizza.size + " size pizza. Your total is $" + newPizza.price);
   })
 })
