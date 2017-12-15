@@ -56,6 +56,6 @@ $(document).ready(function(){
     })
     var newPizza = new Pizza(size, toppingsArray);
     newPizza.calculatePrice();
-    $("#result").append("You just ordered a " + newPizza.size + " size pizza. Your total is $" + newPizza.price);
+    $("#result").append("You just ordered a " + newPizza.size + " size pizza with " + newPizza.toppings.join(", ") + ". Your total is $" + newPizza.price);
   })
 })
