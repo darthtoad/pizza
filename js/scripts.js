@@ -1,5 +1,6 @@
 var pizzas = [];
-var final = 0;
+
+var pizzaNumber = 0;
 
 var toppingsObj = {
   pepperoni: 2,
@@ -20,6 +21,7 @@ var sizeObj = {
 }
 
 var number = 0;
+var final = 0;
 
 var Pizza = function(size, toppings) {
   this.size = size;
@@ -28,38 +30,71 @@ var Pizza = function(size, toppings) {
 }
 
 Pizza.prototype.calculatePrice = function() {
-  var sizesTotal = 0;
+  //debugger;
   for (var key in sizeObj) {
-    pizzas.forEach(function(value) {
+    var currentSize = 0;
+    for (value in pizzas[pizzaNumber]) {
+      console.log(key);
+      console.log(value);
+      if (value === "size") {
+        if (key === pizzas[pizzaNumber].size) {
+          currentSize = sizeObj[key];
+          console.log("eiorfjfoewj")
+        }
+      }
+    }
+    this.price += currentSize;
+    final += currentSize;
+  }
+  for (var key in toppingsObj) {
+    var currentToppings = 0;
+    for (value in pizzas[pizzaNumber]) {
+      if (value === "toppings") {
+        pizzas[pizzaNumber].toppings.forEach(function(topping){
+          console.log(key);
+          console.log(topping);
+          if (key === topping) {
+            currentToppings = toppingsObj[key];
+          }
+        })
+      }
+    }
+    this.price += currentToppings;
+    final += currentToppings;
+  }
+    /*pizzas.forEach(function(value) {
       if (key === value.size) {
-        sizesTotal += sizeObj[key];
+        currentSize = sizeObj[key];
       }
     })
+    this.price += currentSize;
+    final += currentSize;
   }
-  var toppingsTotal = 0;
   for (var key in toppingsObj) {
+    var currentToppings = 0;
     pizzas.forEach(function(value){
-      console.log(value.toppings);
       value.toppings.forEach(function(topping) {
         if (key === topping) {
-          toppingsTotal += toppingsObj[key];
+          currentToppings = toppingsObj[key];
         }
       })
     })
+    this.price += currentToppings;
+    final += currentToppings;*/
     // this.toppings.forEach(function(value) {
     //   if (key === value.toppings) {
     //     toppingsTotal += toppingsObj[key];
     //   }
     // })
-  }
-  this.price += toppingsTotal + sizesTotal;
-  //this.price *= this.number;
 }
+  //this.price = currentToppings + currentSize;
+  //final += currentToppings + currentSize;
+
+  //this.price *= this.number;
 
 $(document).ready(function(){
   $("form#number-input").submit(function(event){
     event.preventDefault();
-    final = 0;
     $("#result").empty();
     number = $("input#number").val();
     if (!number) {
@@ -110,6 +145,7 @@ $(document).ready(function(){
   })
   $("form#order").submit(function(event){
     event.preventDefault();
+    final = 0;
     $("#result").empty();
     var allToppings = [];
     var allSizes = [];
@@ -136,12 +172,19 @@ $(document).ready(function(){
       })*/
     }
     console.log(allToppings);
+    console.log(allSizes);
     for (i = 0; i < number; i++) {
       var newPizza = new Pizza(allSizes[i], allToppings[i]);
+      console.log(newPizza);
       pizzas.push(newPizza);
-      final += newPizza.calculatePrice();
+      newPizza.calculatePrice();
+      pizzaNumber = pizzaNumber + 1;
     }
     //var newPizza = new Pizza(sizes, toppingsArray);
-    $("#result").append("<br><br>Your total is $" + newPizza.price + "<br><br>");
+    $("#result").append("<br><br>Your total is $" + final + "<br>" + "You ordered:<br>");
+    pizzas.forEach(function(pizza){
+      $("#result").append("A " + pizza.size + " pizza with " + pizza.toppings.join(" and ") + ". The price for this pizza is $" + pizza.price + "<br>");
+    });
+    $("#order").hide();
   })
 })
