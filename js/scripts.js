@@ -186,5 +186,42 @@ $(document).ready(function(){
       $("#result").append("A " + pizza.size + " pizza with " + pizza.toppings.join(" and ") + ". The price for this pizza is $" + pizza.price + "<br>");
     });
     $("#order").hide();
+    $("#address").show();
+  })
+  $("form#address").submit(function(event) {
+    event.preventDefault();
+    var ifDelivery = $("input:radio[name=obtain]:checked").val();
+    if (ifDelivery === "pick-up") {
+      $("#address").hide();
+      $("#result").append("<br>Your order will be ready in 30 minutes")
+    } else {
+      $("#address").hide();
+      $(".address").show();
+      $("form.address").prepend(
+        '<div class="form-group">' +
+          '<label for="street">Street</label>' +
+          '<input type="text" class="form-control street">' +
+        '</div>' +
+        '<div class="form-group">' +
+          '<label for="city">City</label>' +
+          '<input type="text" class="form-control city">' +
+        '</div>' +
+        '<div class="form-group">' +
+          '<label for="state">State</label>' +
+          '<input type="text" class="form-control state">' +
+        '</div>' +
+        '<div class="form-group">' +
+          '<label for="zip-code">Zip Code</label>' +
+          '<input type="text" class="form-control zip-code">' +
+        '</div>'
+      )
+    }
+  })
+  $("form.address").submit(function(event){
+    debugger;
+    console.log("success");
+    event.preventDefault();
+    $(".address").hide();
+    $("#result").append("Your order will be sent to: <br>" + $("input.street").val() + "<br>" + $("input.city").val() + ", " + $("input.state").val() + " " + $("input.zip-code").val() + "<br>It should arrive within 45 minutes.");
   })
 })
