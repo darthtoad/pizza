@@ -135,7 +135,12 @@ $(document).ready(function(){
     }
     $("#result").append("<br><br>Your total is $" + final + "<br>" + "You ordered:<br>");
     pizzas.forEach(function(pizza){
-      $("#result").append("A " + pizza.size + " pizza with " + pizza.toppings.join(" and ") + ". The price for this pizza is $" + pizza.price + "<br>");
+      if (!(pizza.toppings.join(""))) {
+        $("#result").append("A " + pizza.size + " pizza. The price for this pizza is $" + pizza.price + "<br>");
+        console.log("yay");
+      } else {
+        $("#result").append("A " + pizza.size + " pizza with " + pizza.toppings.join(" and ") + ". The price for this pizza is $" + pizza.price + "<br>");
+      }
     });
     $("#order").hide();
     $("#address").show();
